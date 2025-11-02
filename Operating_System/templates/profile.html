@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile - Secure System Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-brand">🔐 Secure System Call Interface</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+            <a href="{{ url_for('logs') }}">Logs</a>
+            <a href="{{ url_for('profile') }}" class="active">Profile</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="profile-container">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">👤</div>
+                    <h2>{{ user_data.full_name }}</h2>
+                    <p class="profile-username">@{{ username }}</p>
+                    <span class="badge {% if user_data.role == 'admin' %}badge-admin{% else %}badge-user{% endif %}">
+                        {{ user_data.role }}
+                    </span>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="profile-stat-item">
+                        <div class="profile-stat-number">{{ user_stats.total_actions }}</div>
+                        <div class="profile-stat-label">Total Actions</div>
+                    </div>
+                    <div class="profile-stat-item">
+                        <div class="profile-stat-number">{{ user_stats.successful }}</div>
+                        <div class="profile-stat-label">Successful</div>
+                    </div>
+                    <div class="profile-stat-item">
+                        <div class="profile-stat-number">{{ user_stats.denied }}</div>
+                        <div class="profile-stat-label">Denied</div>
+                    </div>
+                </div>
+
+                <div class="profile-info">
+                    <h3>Account Information</h3>
+                    <div class="info-row">
+                        <span class="info-label">Username:</span>
+                        <span class="info-value">{{ username }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Full Name:</span>
+                        <span class="info-value">{{ user_data.full_name }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Role:</span>
+                        <span class="info-value">{{ user_data.role }}</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Last Activity:</span>
+                        <span class="info-value">{{ user_stats.last_login }}</span>
+                    </div>
+                </div>
+
+                <div class="profile-permissions">
+                    <h3>Permissions</h3>
+                    {% if user_data.role == 'admin' %}
+                    <ul class="permission-list">
+                        <li>✅ Full system access</li>
+                        <li>✅ All file operations</li>
+                        <li>✅ Process management</li>
+                        <li>✅ View all logs</li>
+                        <li>✅ Clear system logs</li>
+                    </ul>
+                    {% else %}
+                    <ul class="permission-list">
+                        <li>✅ Open files</li>
+                        <li>✅ Read files</li>
+                        <li>❌ Write files (restricted)</li>
+                        <li>❌ Delete files (restricted)</li>
+                        <li>❌ Process management (restricted)</li>
+                    </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

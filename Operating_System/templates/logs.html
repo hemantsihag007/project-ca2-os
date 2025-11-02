@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Logs - Secure System Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-brand">🔐 Secure System Call Interface</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+            <a href="{{ url_for('logs') }}" class="active">Logs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <h2 class="page-title">📋 System Call Logs</h2>
+        <p class="info-text-white">All system call activities are recorded here with timestamps and IP addresses</p>
+
+        {% if role == 'admin' %}
+        <div class="log-actions">
+            <form method="POST" action="{{ url_for('clear_logs') }}" onsubmit="return confirm('Are you sure you want to clear all logs?');">
+                <button type="submit" class="btn-danger">🗑️ Clear All Logs</button>
+            </form>
+        </div>
+        {% endif %}
+
+        <div class="logs-table-container">
+            <table class="logs-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Username</th>
+                        <th>Action</th>
+                        <th>Result</th>
+                        <th>Timestamp</th>
+                        <th>IP Address</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if logs %}
+                        {% for log in logs %}
+                        <tr>
+                            <td>{{ loop.index }}</td>
+                            <td>{{ log.username }}</td>
+                            <td>{{ log.action }}</td>
+                            <td>
+                                <span class="status-badge {% if log.result == 'Success' %}status-success{% else %}status-denied{% endif %}">
+                                    {{ log.result }}
+                                </span>
+                            </td>
+                            <td>{{ log.timestamp }}</td>
+                            <td>{{ log.ip }}</td>
+                        </tr>
+                        {% endfor %}
+                    {% else %}
+                        <tr>
+                            <td colspan="6" style="text-align: center;">No logs available yet.</td>
+                        </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Help - Secure System Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-brand">🔐 Secure System Call Interface</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+            <a href="{{ url_for('logs') }}">Logs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help_page') }}" class="active">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <h2>❓ Help & Documentation</h2>
+            
+            <div class="help-section">
+                <h3>🎯 About This System</h3>
+                <p>This is a secure system call interface that simulates operating system security mechanisms including authentication, authorization, and audit logging.</p>
+            </div>
+
+            <div class="help-section">
+                <h3>📋 System Call Operations</h3>
+                <ul>
+                    <li><strong>Open File:</strong> Simulates opening a file for access</li>
+                    <li><strong>Read File:</strong> Simulates reading contents from a file</li>
+                    <li><strong>Write File:</strong> Simulates writing data to a file (Admin only)</li>
+                    <li><strong>Delete File:</strong> Simulates deleting a file (Admin only)</li>
+                    <li><strong>Create Process:</strong> Simulates creating a new process (Admin only)</li>
+                    <li><strong>Kill Process:</strong> Simulates terminating a process (Admin only)</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>👥 User Roles</h3>
+                <div class="role-info">
+                    <h4>Administrator</h4>
+                    <p>Has full access to all system calls and can manage logs.</p>
+                </div>
+                <div class="role-info">
+                    <h4>Normal User</h4>
+                    <p>Limited access - can only perform Open File and Read File operations.</p>
+                </div>
+            </div>
+
+            <div class="help-section">
+                <h3>🔐 Security Features</h3>
+                <ul>
+                    <li><strong>Authentication:</strong> Username and password verification</li>
+                    <li><strong>Authorization:</strong> Role-based access control</li>
+                    <li><strong>Audit Logging:</strong> All activities are logged with timestamps</li>
+                    <li><strong>IP Tracking:</strong> System records IP addresses for security</li>
+                </ul>
+            </div>
+
+            <div class="help-section">
+                <h3>📊 Features</h3>
+                <ul>
+                    <li><strong>Dashboard:</strong> Quick access to system calls with statistics</li>
+                    <li><strong>Statistics:</strong> View system-wide activity analytics</li>
+                    <li><strong>Logs:</strong> Complete audit trail of all operations</li>
+                    <li><strong>Profile:</strong> View your account details and activity</li>
+                </ul>
+            </div>
+
+            {% if role == 'admin' %}
+            <div class="help-section">
+                <h3>⚙️ Admin Features</h3>
+                <ul>
+                    <li>Clear all system logs</li>
+                    <li>View all users' activities</li>
+                    <li>Access to all system operations</li>
+                </ul>
+            </div>
+            {% endif %}
+
+            <div class="help-section">
+                <h3>📞 Demo Accounts</h3>
+                <p><strong>Admin:</strong> username: admin, password: 1234</p>
+                <p><strong>User 1:</strong> username: user1, password: abcd</p>
+                <p><strong>User 2:</strong<p><strong>User 2:</strong> username: user2, password: pass123</p>
+            </div>
+
+            <div class="help-section">
+                <h3>🎓 Project Information</h3>
+                <p><strong>Course:</strong> Operating Systems</p>
+                <p><strong>Purpose:</strong> Demonstrate system call security, authentication, and authorization</p>
+                <p><strong>Technologies:</strong> Python Flask, HTML, CSS, JavaScript</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

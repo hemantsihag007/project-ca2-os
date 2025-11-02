@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard - Secure System Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-brand">🔐 Secure System Call Interface</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}" class="active">Dashboard</a>
+            <a href="{{ url_for('statistics') }}">Statistics</a>
+            <a href="{{ url_for('logs') }}">Logs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="flash-message flash-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <div class="card">
+            <h2>Welcome, {{ full_name }}!</h2>
+            <div class="role-badge">
+                Role: <span class="badge {% if role == 'admin' %}badge-admin{% else %}badge-user{% endif %}">{{ role }}</span>
+            </div>
+        </div>
+
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-number">{{ stats.total }}</div>
+                <div class="stat-label">Total Actions</div>
+            </div>
+            <div class="stat-card stat-success">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number">{{ stats.success }}</div>
+                <div class="stat-label">Successful</div>
+            </div>
+            <div class="stat-card stat-denied">
+                <div class="stat-icon">❌</div>
+                <div class="stat-number">{{ stats.denied }}</div>
+                <div class="stat-label">Denied</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>System Call Operations</h2>
+            <p class="info-text">Click on any button to simulate a system call:</p>
+            
+            <div class="syscall-grid">
+                <button class="syscall-btn" onclick="makeSystemCall('Open File')">
+                    📂 Open File
+                </button>
+                <button class="syscall-btn" onclick="makeSystemCall('Read File')">
+                    📖 Read File
+                </button>
+                <button class="syscall-btn" onclick="makeSystemCall('Write File')">
+                    ✏️ Write File
+                </button>
+                <button class="syscall-btn" onclick="makeSystemCall('Delete File')">
+                    🗑️ Delete File
+                </button>
+                <button class="syscall-btn" onclick="makeSystemCall('Create Process')">
+                    ⚙️ Create Process
+                </button>
+                <button class="syscall-btn" onclick="makeSystemCall('Kill Process')">
+                    🛑 Kill Process
+                </button>
+            </div>
+
+            <div class="info-box">
+                <h4>📋 Your Permissions:</h4>
+                {% if role == 'admin' %}
+                <p>✅ You have <strong>full access</strong> to all system calls.</p>
+                <p>🔑 Admin privileges allow you to:</p>
+                <ul>
+                    <li>Perform all file operations</li>
+                    <li>Manage processes</li>
+                    <li>View all logs and statistics</li>
+                    <li>Clear system logs</li>
+                </ul>
+                {% else %}
+                <p>⚠️ You can only perform: <strong>Open File</strong> and <strong>Read File</strong></p>
+                <p>❌ Restricted operations:</p>
+                <ul>
+                    <li>Write File - Admin only</li>
+                    <li>Delete File - Admin only</li>
+                    <li>Process Management - Admin only</li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalIcon"></div>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

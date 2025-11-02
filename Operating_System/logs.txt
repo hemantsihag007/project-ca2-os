@@ -1,0 +1,42 @@
+Username | Action | Result | Timestamp | IP Address
+----------------------------------------------------------------------------------------------------
+user1 | Login | Success | 2025-10-30 11:53:24 | 127.0.0.1
+user1 | Delete File | Denied | 2025-10-30 11:53:37 | 127.0.0.1
+user1 | Logout | Success | 2025-10-30 11:53:51 | 127.0.0.1
+user1 | Login | Success | 2025-10-30 11:54:06 | 127.0.0.1
+user1 | Logout | Success | 2025-10-30 11:54:36 | 127.0.0.1
+user2 | Login | Success | 2025-10-30 11:54:47 | 127.0.0.1
+user2 | Logout | Success | 2025-10-30 11:56:12 | 127.0.0.1
+admin | Login | Success | 2025-10-30 11:56:25 | 127.0.0.1
+admin | Create Process | Success | 2025-10-30 11:56:31 | 127.0.0.1
+admin | Clear All Logs | Success | 2025-10-30 11:56:46 | 127.0.0.1
+admin | Clear All Logs | Success | 2025-10-30 11:56:50 | 127.0.0.1
+admin | Logout | Success | 2025-10-30 11:57:02 | 127.0.0.1
+admin | Login | Success | 2025-10-30 12:00:15 | 127.0.0.1
+user1 | Login | Success | 2025-10-30 14:05:01 | 127.0.0.1
+user1 | Kill Process | Denied | 2025-10-30 14:05:06 | 127.0.0.1
+user1 | Read File | Success | 2025-10-30 14:05:09 | 127.0.0.1
+user1 | Logout | Success | 2025-10-30 14:06:00 | 127.0.0.1
+hemant  | Login | Failed | 2025-10-30 14:06:11 | 127.0.0.1
+admin | Login | Success | 2025-10-30 14:06:19 | 127.0.0.1
+admin | Logout | Success | 2025-10-30 14:06:40 | 127.0.0.1
+user1 | Login | Success | 2025-10-30 14:06:48 | 127.0.0.1
+user1 | Delete File | Denied | 2025-10-30 14:06:58 | 127.0.0.1
+user1 | Open File | Success | 2025-10-30 14:07:03 | 127.0.0.1
+user1 | Read File | Success | 2025-10-30 14:07:06 | 127.0.0.1
+user1 | Delete File | Denied | 2025-10-30 14:07:19 | 127.0.0.1
+admin | Login | Success | 2025-10-30 23:43:33 | 127.0.0.1
+admin | Kill Process | Success | 2025-10-30 23:43:41 | 127.0.0.1
+admin | Clear All Logs | Success | 2025-10-30 23:43:58 | 127.0.0.1
+admin | Logout | Success | 2025-10-30 23:44:11 | 127.0.0.1
+user1 | Login | Success | 2025-10-30 23:50:01 | 127.0.0.1
+user1 | Kill Process | Denied | 2025-10-30 23:50:14 | 127.0.0.1
+user1 | Logout | Success | 2025-10-30 23:51:00 | 127.0.0.1
+user1 | Login | Success | 2025-10-31 09:08:29 | 127.0.0.1
+user1 | Read File | Success | 2025-10-31 09:08:43 | 127.0.0.1
+user1 | Logout | Success | 2025-10-31 09:09:14 | 127.0.0.1
+user1 | Login | Success | 2025-10-31 09:09:28 | 127.0.0.1
+user1 | Create Process | Denied | 2025-10-31 09:09:31 | 127.0.0.1
+user1 | Logout | Success | 2025-10-31 09:13:04 | 127.0.0.1
+admin | Login | Success | 2025-10-31 09:13:51 | 127.0.0.1
+admin | Kill Process | Success | 2025-10-31 09:15:07 | 127.0.0.1
