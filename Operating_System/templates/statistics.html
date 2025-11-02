@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Statistics - Secure System Call</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="navbar">
+        <div class="nav-brand">🔐 Secure System Call Interface</div>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('statistics') }}" class="active">Statistics</a>
+            <a href="{{ url_for('logs') }}">Logs</a>
+            <a href="{{ url_for('profile') }}">Profile</a>
+            <a href="{{ url_for('help_page') }}">Help</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="page-title">📊 System Statistics</h2>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-number">{{ stats.total }}</div>
+                <div class="stat-label">Total Operations</div>
+            </div>
+            <div class="stat-card stat-success">
+                <div class="stat-icon">✅</div>
+                <div class="stat-number">{{ stats.success }}</div>
+                <div class="stat-label">Successful</div>
+            </div>
+            <div class="stat-card stat-denied">
+                <div class="stat-icon">❌</div>
+                <div class="stat-number">{{ stats.denied }}</div>
+                <div class="stat-label">Denied</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>📋 Actions Breakdown</h3>
+            <div class="action-stats">
+                {% for action, count in stats.actions.items() %}
+                <div class="action-item">
+                    <span class="action-name">{{ action }}</span>
+                    <span class="action-count">{{ count }} times</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>👥 User Activity Summary</h3>
+            <table class="logs-table">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Total Actions</th>
+                        <th>Successful</th>
+                        <th>Denied</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for username, activity in user_activity.items() %}
+                    <tr>
+                        <td>{{ username }}</td>
+                        <td>{{ activity.total }}</td>
+                        <td><span class="status-success">{{ activity.success }}</span></td>
+                        <td><span class="status-denied">{{ activity.denied }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="card">
+            <h3>⏱️ Recent Activities (Last 10)</h3>
+            <div class="recent-activities">
+                {% for log in recent_logs %}
+                <div class="activity-item">
+                    <span class="activity-user">{{ log.username }}</span>
+                    <span class="activity-action">{{ log.action }}</span>
+                    <span class="status-badge {% if log.result == 'Success' %}status-success{% else %}status-denied{% endif %}">
+                        {{ log.result }}
+                    </span>
+                    <span class="activity-time">{{ log.timestamp }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

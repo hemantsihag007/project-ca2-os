@@ -1,0 +1,17 @@
+{
+    "admin": {
+        "password": "1234",
+        "role": "admin",
+        "full_name": "System Administrator"
+    },
+    "user1": {
+        "password": "abcd",
+        "role": "normal",
+        "full_name": "John Doe"
+    },
+    "user2": {
+        "password": "pass123",
+        "role": "normal",
+        "full_name": "Jane Smith"
+    }
+}
